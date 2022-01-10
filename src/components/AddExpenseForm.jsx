@@ -26,6 +26,7 @@ export default function AddExpenseForm() {
         currency,
         paymentMethod,
         tag,
+        exchangeRates: { ...fetchedCurrencies },
       },
     ));
 
