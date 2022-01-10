@@ -8,10 +8,10 @@ export default function AddExpenseForm() {
   const [currency, changeCurrency] = useState('USD');
   const [paymentMethod, changePaymentMethod] = useState('cash');
   const [tag, changeTag] = useState('food');
+
   const dispatch = useDispatch();
   const walletExpenses = useSelector((state) => state.wallet.expenses);
   const fetchedCurrencies = useSelector((state) => state.wallet.currencies);
-  console.log(fetchedCurrencies[0]);
 
   useEffect(() => {
     dispatch(fetchCurrenciesToState());
@@ -71,8 +71,14 @@ export default function AddExpenseForm() {
             onChange={ ({ target: { value } }) => changeCurrency(value) }
             value={ currency }
           >
-            {fetchedCurrencies.map(({ code }) => (
-              <option key={ code } value={ code }>{code}</option>
+            {fetchedCurrencies.map(({ code }, index) => (
+              <option
+                data-testid={ code }
+                key={ index + 1 }
+                value={ code }
+              >
+                {code}
+              </option>
             ))}
           </select>
         </label>

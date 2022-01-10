@@ -28,7 +28,6 @@ export const addCurrencies = (currencies, error) => (
 export function fetchCurrenciesToState() {
   return async (dispatch) => {
     const { data, error } = await fetchCurrencies();
-    console.log(data);
     dispatch(addCurrencies(data, error));
   };
 }
