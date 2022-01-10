@@ -1,7 +1,7 @@
 import { SET_USER_EMAIL } from '../actions';
 
 const INITIAL_STATE = {
-  email: '',
+  email: 'Jeff@hotmail.com',
   isAuth: false,
 };
 
