@@ -2,6 +2,7 @@ import { SET_USER_EMAIL } from '../actions';
 
 const INITIAL_STATE = {
   email: '',
+  isAuth: false,
 };
 
 const user = (state = INITIAL_STATE, action) => {
@@ -10,6 +11,7 @@ const user = (state = INITIAL_STATE, action) => {
     return {
       ...state,
       email: action.payload,
+      isAuth: true,
     };
   default:
     return state;

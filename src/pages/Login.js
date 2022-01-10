@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 import { setUserEmail } from '../actions';
 
 function Login() {
@@ -7,6 +8,7 @@ function Login() {
   const [userEmail, changeUserEmail] = useState('');
   const [userPasswordLength, changeUserPassword] = useState(0);
   const dispatch = useDispatch();
+  const history = useHistory();
 
   const handleEmailChange = ({ target: { value } }) => {
     changeUserEmail(value);
@@ -18,6 +20,7 @@ function Login() {
 
   const handleSubmit = () => {
     dispatch(setUserEmail(userEmail));
+    history.push('/carteira');
   };
 
   useEffect(() => {
@@ -52,7 +55,13 @@ function Login() {
           />
         </div>
         <div>
-          <button type="button" disabled={ isDisabled } onClick={ handleSubmit }>Entrar</button>
+          <button
+            type="button"
+            disabled={ isDisabled }
+            onClick={ handleSubmit }
+          >
+            Entrar
+          </button>
         </div>
       </form>
     </main>);
