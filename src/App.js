@@ -1,14 +1,10 @@
-import React, { useEffect } from 'react';
-import fetchCurrencies from './apis/fetchCurrencies';
+import React from 'react';
+import Routes from './routes/Routes';
 
 function App() {
-  useEffect(() => {
-    const fetch = async () => {
-      await fetchCurrencies();
-    };
-    fetch();
-  }, []);
-  return <div>Hello, TrybeWallet!</div>;
+  return (
+    <Routes />
+  );
 }
 
 export default App;
