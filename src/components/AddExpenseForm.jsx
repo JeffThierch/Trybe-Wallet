@@ -1,15 +1,21 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { addExpenseToWallet } from '../actions';
+import { addExpenseToWallet, fetchCurrenciesToState } from '../actions';
 
 export default function AddExpenseForm() {
   const [valueExpense, changeValue] = useState(0);
   const [description, changeDescription] = useState('');
-  const [currency, changeCurrency] = useState('');
+  const [currency, changeCurrency] = useState('USD');
   const [paymentMethod, changePaymentMethod] = useState('cash');
   const [tag, changeTag] = useState('food');
   const dispatch = useDispatch();
   const walletExpenses = useSelector((state) => state.wallet.expenses);
+  const fetchedCurrencies = useSelector((state) => state.wallet.currencies);
+  console.log(fetchedCurrencies[0]);
+
+  useEffect(() => {
+    dispatch(fetchCurrenciesToState());
+  }, [dispatch]);
 
   const handleBtnClick = () => {
     dispatch(addExpenseToWallet(
@@ -25,7 +31,7 @@ export default function AddExpenseForm() {
 
     changeValue(0);
     changeDescription('');
-    changeCurrency('');
+    changeCurrency('USD');
     changePaymentMethod('cash');
     changeTag('food');
   };
@@ -65,7 +71,9 @@ export default function AddExpenseForm() {
             onChange={ ({ target: { value } }) => changeCurrency(value) }
             value={ currency }
           >
-            <option>ola</option>
+            {fetchedCurrencies.map(({ code }) => (
+              <option key={ code } value={ code }>{code}</option>
+            ))}
           </select>
         </label>
       </section>

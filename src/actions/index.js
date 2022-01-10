@@ -1,6 +1,8 @@
-// Coloque aqui suas actions
+import fetchCurrencies from '../apis/fetchCurrencies';
+
 export const SET_USER_EMAIL = 'SET_USER_EMAIL';
 export const ADD_EXPENSE = 'ADD_EXPENSE';
+export const ADD_CURRENCIES = 'ADD_CURRENCIES';
 
 export const setUserEmail = (email) => (
   {
@@ -15,3 +17,18 @@ export const addExpenseToWallet = (expense) => (
     payload: expense,
   }
 );
+
+export const addCurrencies = (currencies, error) => (
+  {
+    type: ADD_CURRENCIES,
+    payload: { currencies, error },
+  }
+);
+
+export function fetchCurrenciesToState() {
+  return async (dispatch) => {
+    const { data, error } = await fetchCurrencies();
+    console.log(data);
+    dispatch(addCurrencies(data, error));
+  };
+}
