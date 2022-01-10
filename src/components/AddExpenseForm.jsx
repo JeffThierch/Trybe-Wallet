@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { addExpenseToWallet } from '../actions';
 
 export default function AddExpenseForm() {
   const [valueExpense, changeValue] = useState(0);
@@ -6,6 +8,28 @@ export default function AddExpenseForm() {
   const [currency, changeCurrency] = useState('');
   const [paymentMethod, changePaymentMethod] = useState('cash');
   const [tag, changeTag] = useState('food');
+  const dispatch = useDispatch();
+  const walletExpenses = useSelector((state) => state.wallet.expenses);
+
+  const handleBtnClick = () => {
+    dispatch(addExpenseToWallet(
+      {
+        id: walletExpenses.length,
+        valueExpense,
+        description,
+        currency,
+        paymentMethod,
+        tag,
+      },
+    ));
+
+    changeValue(0);
+    changeDescription('');
+    changeCurrency('');
+    changePaymentMethod('cash');
+    changeTag('food');
+  };
+
   return (
     <form>
       <section>
@@ -77,7 +101,7 @@ export default function AddExpenseForm() {
           </select>
         </label>
       </section>
-      <button type="button">Adicionar despesa</button>
+      <button type="button" onClick={ handleBtnClick }>Adicionar despesa</button>
     </form>
   );
 }
