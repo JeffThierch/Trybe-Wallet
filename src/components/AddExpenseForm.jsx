@@ -39,6 +39,7 @@ export default function AddExpenseForm() {
 
   return (
     <form>
+
       <section>
         <label htmlFor="value-input">
           Valor:
@@ -51,18 +52,7 @@ export default function AddExpenseForm() {
           />
         </label>
       </section>
-      <section>
-        <label htmlFor="description-input">
-          Descricao:
-          <input
-            type="text"
-            value={ description }
-            id="description-input"
-            data-testid="description-input"
-            onChange={ ({ target: { value } }) => changeDescription(value) }
-          />
-        </label>
-      </section>
+
       <section>
         <label htmlFor="currency-input">
           Moeda:
@@ -84,6 +74,7 @@ export default function AddExpenseForm() {
           </select>
         </label>
       </section>
+
       <section>
         <label htmlFor="method-input">
           Metodo de Pagamento:
@@ -99,9 +90,10 @@ export default function AddExpenseForm() {
           </select>
         </label>
       </section>
+
       <section>
         <label htmlFor="tag-input">
-          Metodo de Pagamento:
+          Tag:
           <select
             id="tag-input"
             data-testid="tag-input"
@@ -116,6 +108,20 @@ export default function AddExpenseForm() {
           </select>
         </label>
       </section>
+
+      <section>
+        <label htmlFor="description-input">
+          Descricao:
+          <input
+            type="text"
+            value={ description }
+            id="description-input"
+            data-testid="description-input"
+            onChange={ ({ target: { value } }) => changeDescription(value) }
+          />
+        </label>
+      </section>
+
       <button type="button" onClick={ handleBtnClick }>Adicionar despesa</button>
     </form>
   );
