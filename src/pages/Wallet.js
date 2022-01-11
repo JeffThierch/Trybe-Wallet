@@ -1,18 +1,20 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import AddExpenseForm from '../components/AddExpenseForm';
+import EditExpenseForm from '../components/EditExpenseForm';
 import ExpensesTable from '../components/ExpensesTable';
 import Header from '../components/Header';
 
-class Wallet extends React.Component {
-  render() {
-    return (
-      <>
-        <Header />
-        <AddExpenseForm />
-        <ExpensesTable />
-      </>
-    );
-  }
+function Wallet() {
+  const isInEditMode = useSelector((state) => state.wallet.isInEditMode);
+  return (
+    <>
+      <Header />
+      {isInEditMode ? <EditExpenseForm /> : <AddExpenseForm /> }
+
+      <ExpensesTable />
+    </>
+  );
 }
 
 export default Wallet;

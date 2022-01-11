@@ -1,7 +1,7 @@
 import React from 'react';
 import { FaTrashAlt, FaEdit } from 'react-icons/fa';
 import { useSelector, useDispatch } from 'react-redux';
-import { removeExpense } from '../actions';
+import { removeExpense, enterInEditMode } from '../actions';
 import { tablesHeads } from '../data';
 
 export default function ExpensesTable() {
@@ -16,6 +16,11 @@ export default function ExpensesTable() {
 
   const deleteExpense = (expenseID) => {
     dispatch(removeExpense(expenseID));
+  };
+
+  const editExpense = (expenseID) => {
+    const expenseToEdit = walletExpenses.filter(({ id }) => id === expenseID);
+    dispatch(enterInEditMode(expenseToEdit[0]));
   };
 
   return (
@@ -48,7 +53,11 @@ export default function ExpensesTable() {
 
             </td>
             <td>
-              <button type="button">
+              <button
+                type="button"
+                data-testid="edit-btn"
+                onClick={ () => editExpense(id) }
+              >
                 <FaEdit />
               </button>
 
