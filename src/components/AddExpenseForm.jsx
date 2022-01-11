@@ -25,7 +25,7 @@ export default function AddExpenseForm() {
     dispatch(addExpenseToWallet(
       {
         id: walletExpenses.length,
-        value: valueExpense.toString(),
+        value: valueExpense,
         description,
         currency,
         method: paymentMethod,

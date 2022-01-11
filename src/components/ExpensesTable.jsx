@@ -9,9 +9,9 @@ export default function ExpensesTable() {
   const dispatch = useDispatch();
 
   const calculateCurrencyValue = (value, currency, exchangeRates) => {
-    const convertedCurrencyValue = parseFloat(exchangeRates[currency].ask).toFixed(2);
-    const totalAmount = (convertedCurrencyValue * value).toFixed(2);
-    return totalAmount;
+    const convertedCurrencyValue = parseFloat(exchangeRates[currency].ask);
+    const totalAmount = (convertedCurrencyValue * value);
+    return totalAmount.toFixed(2);
   };
 
   const deleteExpense = (expenseID) => {
@@ -35,7 +35,7 @@ export default function ExpensesTable() {
             <td>{description}</td>
             <td>{tag}</td>
             <td>{method}</td>
-            <td>{value}</td>
+            <td>{parseFloat(value).toFixed(2)}</td>
             <td>{exchangeRates[currency].name.split('/')[0]}</td>
             <td>{parseFloat(exchangeRates[currency].ask).toFixed(2)}</td>
             <td>{calculateCurrencyValue(value, currency, exchangeRates)}</td>
