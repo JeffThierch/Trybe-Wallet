@@ -21,7 +21,7 @@ function Header() {
       <p data-testid="email-field">{`Email: ${userEmail}`}</p>
       <p data-testid="total-field">
         {`
-          Despesa Total: ${calculateTotal(walletExpenses)} `}
+          Despesa Total:${calculateTotal(walletExpenses)} `}
       </p>
       <select
         value={ currencieSelected }

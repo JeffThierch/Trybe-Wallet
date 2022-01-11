@@ -33,6 +33,7 @@ export default function EditExpenseForm() {
           <input
             type="number"
             id="Edit-value-input"
+            data-testid="value-input"
             value={ valueExpense }
             onChange={ ({ target }) => changeValue(target.value) }
           />
@@ -44,6 +45,7 @@ export default function EditExpenseForm() {
           Moeda:
           <select
             id="Edit-currency-input"
+            data-testid="currency-input"
             onChange={ ({ target }) => changeCurrency(target.value) }
             value={ currencyValue }
           >
@@ -64,6 +66,7 @@ export default function EditExpenseForm() {
           Metodo de Pagamento:
           <select
             id="Edit-method-input"
+            data-testid="method-input"
             value={ paymentMethod }
             onChange={ ({ target }) => changePaymentMethod(target.value) }
           >
@@ -80,6 +83,7 @@ export default function EditExpenseForm() {
           Tag:
           <select
             id="Edit-tag-input"
+            data-testid="tag-input"
             value={ tagValue }
             onChange={ ({ target }) => changeTagValue(target.value) }
           >
@@ -97,6 +101,7 @@ export default function EditExpenseForm() {
             type="text"
             value={ descriptionValue }
             id="Edit-description-input"
+            data-testid="description-input"
             onChange={ ({ target }) => changeDescriptionValue(target.value) }
           />
         </label>
