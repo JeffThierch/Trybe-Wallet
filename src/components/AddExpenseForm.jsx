@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addExpenseToWallet, fetchCurrenciesToState } from '../actions';
+import { tags, methods } from '../data';
 
 export default function AddExpenseForm() {
   const [valueExpense, changeValue] = useState(0);
   const [description, changeDescription] = useState('');
   const [currency, changeCurrency] = useState('USD');
-  const [paymentMethod, changePaymentMethod] = useState('cash');
-  const [tag, changeTag] = useState('food');
+  const [paymentMethod, changePaymentMethod] = useState(methods[0]);
+  const [tag, changeTag] = useState(tags[0]);
 
   const dispatch = useDispatch();
   const walletExpenses = useSelector((state) => state.wallet.expenses);
@@ -36,8 +37,8 @@ export default function AddExpenseForm() {
     changeValue(0);
     changeDescription('');
     changeCurrency('USD');
-    changePaymentMethod('cash');
-    changeTag('food');
+    changePaymentMethod(methods[0]);
+    changeTag(tags[0]);
   };
 
   return (
@@ -51,7 +52,7 @@ export default function AddExpenseForm() {
             id="value-input"
             value={ valueExpense }
             data-testid="value-input"
-            onChange={ ({ target: { value } }) => changeValue(parseFloat(value)) }
+            onChange={ ({ target: { value } }) => changeValue(value) }
           />
         </label>
       </section>
@@ -87,9 +88,10 @@ export default function AddExpenseForm() {
             value={ paymentMethod }
             onChange={ ({ target: { value } }) => changePaymentMethod(value) }
           >
-            <option value="Dinheiro">Dinheiro</option>
-            <option value="Cartão de crédito">Cartão de crédito</option>
-            <option value="Cartão de débito">Cartão de débito</option>
+            {methods.map((method, index) => (
+              <option key={ index } value={ method }>{method}</option>
+            ))}
+
           </select>
         </label>
       </section>
@@ -103,11 +105,9 @@ export default function AddExpenseForm() {
             value={ tag }
             onChange={ ({ target: { value } }) => changeTag(value) }
           >
-            <option value="Alimentação">Alimentação</option>
-            <option value="Lazer">Lazer</option>
-            <option value="Trabalho">Trabalho</option>
-            <option value="Transporte">Transporte</option>
-            <option value="Saúde">Saúde</option>
+            {tags.map((value, index) => (
+              <option value={ value } key={ index }>{value}</option>
+            ))}
           </select>
         </label>
       </section>

@@ -1,8 +1,12 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { FaTrashAlt, FaEdit } from 'react-icons/fa';
+import { useSelector, useDispatch } from 'react-redux';
+import { removeExpense } from '../actions';
+import { tablesHeads } from '../data';
 
 export default function ExpensesTable() {
   const walletExpenses = useSelector((state) => state.wallet.expenses);
+  const dispatch = useDispatch();
 
   const calculateCurrencyValue = (value, currency, exchangeRates) => {
     const convertedCurrencyValue = parseFloat(exchangeRates[currency].ask).toFixed(2);
@@ -10,19 +14,17 @@ export default function ExpensesTable() {
     return totalAmount;
   };
 
+  const deleteExpense = (expenseID) => {
+    dispatch(removeExpense(expenseID));
+  };
+
   return (
     <table>
       <thead>
         <tr>
-          <th>Descrição</th>
-          <th>Tag</th>
-          <th>Método de pagamento</th>
-          <th>Valor</th>
-          <th>Moeda</th>
-          <th>Câmbio utilizado</th>
-          <th>Valor convertido</th>
-          <th>Moeda de conversão</th>
-          <th>Editar/Excluir</th>
+          {tablesHeads.map((head, index) => (
+            <th key={ index }>{head}</th>
+          ))}
         </tr>
       </thead>
       <tbody>
@@ -35,8 +37,22 @@ export default function ExpensesTable() {
             <td>{method}</td>
             <td>{value}</td>
             <td>{exchangeRates[currency].name.split('/')[0]}</td>
-            <td>{calculateCurrencyValue(value, currency, exchangeRates)}</td>
             <td>{parseFloat(exchangeRates[currency].ask).toFixed(2)}</td>
+            <td>{calculateCurrencyValue(value, currency, exchangeRates)}</td>
+            <td>{exchangeRates[currency].name.split('/')[1]}</td>
+            <td>
+              <button type="button">
+                <FaEdit />
+              </button>
+
+              <button
+                type="button"
+                data-testid="delete-btn"
+                onClick={ () => deleteExpense(id) }
+              >
+                <FaTrashAlt />
+              </button>
+            </td>
           </tr>
         ))}
       </tbody>

@@ -2,6 +2,7 @@ import fetchCurrencies from '../apis/fetchCurrencies';
 
 export const SET_USER_EMAIL = 'SET_USER_EMAIL';
 export const ADD_EXPENSE = 'ADD_EXPENSE';
+export const REMOVE_EXPENSE = 'REMOVE_EXPENSE';
 export const ADD_CURRENCIES = 'ADD_CURRENCIES';
 
 export const setUserEmail = (email) => (
@@ -15,6 +16,13 @@ export const addExpenseToWallet = (expense) => (
   {
     type: ADD_EXPENSE,
     payload: expense,
+  }
+);
+
+export const removeExpense = (expenseID) => (
+  {
+    type: REMOVE_EXPENSE,
+    payload: expenseID,
   }
 );
 
