@@ -35,11 +35,18 @@ export default function ExpensesTable() {
             <td>{description}</td>
             <td>{tag}</td>
             <td>{method}</td>
-            <td>{parseFloat(value).toFixed(2)}</td>
+            <td>{value}</td>
             <td>{exchangeRates[currency].name.split('/')[0]}</td>
             <td>{parseFloat(exchangeRates[currency].ask).toFixed(2)}</td>
             <td>{calculateCurrencyValue(value, currency, exchangeRates)}</td>
-            <td>{exchangeRates[currency].name.split('/')[1]}</td>
+
+            <td>
+              Real
+              {
+                /* exchangeRates[currency].name.split('/')[1] */
+              }
+
+            </td>
             <td>
               <button type="button">
                 <FaEdit />
