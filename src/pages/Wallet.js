@@ -10,6 +10,7 @@ function Wallet() {
   return (
     <>
       <Header />
+
       {isInEditMode ? <EditExpenseForm /> : <AddExpenseForm /> }
 
       <ExpensesTable />

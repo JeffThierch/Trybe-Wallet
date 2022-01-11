@@ -4,20 +4,28 @@ import { addExpenseToWallet, fetchCurrenciesToState } from '../actions';
 import { tags, methods } from '../data';
 
 export default function AddExpenseForm() {
+  const dispatch = useDispatch();
+  const walletExpenses = useSelector((state) => state.wallet.expenses);
+  const fetchedCurrencies = useSelector((state) => state.wallet.currencies);
+  const currenciesData = useSelector((state) => state.wallet.currenciesData);
+
   const [valueExpense, changeValue] = useState(0);
   const [description, changeDescription] = useState('');
   const [currency, changeCurrency] = useState('USD');
   const [paymentMethod, changePaymentMethod] = useState(methods[0]);
   const [tag, changeTag] = useState(tags[0]);
 
-  const dispatch = useDispatch();
-  const walletExpenses = useSelector((state) => state.wallet.expenses);
-  const fetchedCurrencies = useSelector((state) => state.wallet.currencies);
-  const currenciesData = useSelector((state) => state.wallet.currenciesData);
-
   useEffect(() => {
     dispatch(fetchCurrenciesToState());
   }, [dispatch]);
+
+  const resetStateValues = () => {
+    changeValue(0);
+    changeDescription('');
+    changeCurrency('USD');
+    changePaymentMethod(methods[0]);
+    changeTag(tags[0]);
+  };
 
   const handleBtnClick = () => {
     dispatch(fetchCurrenciesToState());
@@ -34,22 +42,18 @@ export default function AddExpenseForm() {
       },
     ));
 
-    changeValue(0);
-    changeDescription('');
-    changeCurrency('USD');
-    changePaymentMethod(methods[0]);
-    changeTag(tags[0]);
+    resetStateValues();
   };
 
   return (
     <form>
 
       <section>
-        <label htmlFor="value-input">
+        <label htmlFor="Add-value-input">
           Valor:
           <input
             type="number"
-            id="value-input"
+            id="Add-value-input"
             value={ valueExpense }
             data-testid="value-input"
             onChange={ ({ target: { value } }) => changeValue(value) }
@@ -58,10 +62,10 @@ export default function AddExpenseForm() {
       </section>
 
       <section>
-        <label htmlFor="currency-input">
+        <label htmlFor="Add-currency-input">
           Moeda:
           <select
-            id="currency-input"
+            id="Add-currency-input"
             data-testid="currency-input"
             onChange={ ({ target: { value } }) => changeCurrency(value) }
             value={ currency }
@@ -80,10 +84,10 @@ export default function AddExpenseForm() {
       </section>
 
       <section>
-        <label htmlFor="method-input">
+        <label htmlFor="Add-method-input">
           Metodo de Pagamento:
           <select
-            id="method-input"
+            id="Add-method-input"
             data-testid="method-input"
             value={ paymentMethod }
             onChange={ ({ target: { value } }) => changePaymentMethod(value) }
@@ -97,10 +101,10 @@ export default function AddExpenseForm() {
       </section>
 
       <section>
-        <label htmlFor="tag-input">
+        <label htmlFor="Add-tag-input">
           Tag:
           <select
-            id="tag-input"
+            id="Add-tag-input"
             data-testid="tag-input"
             value={ tag }
             onChange={ ({ target: { value } }) => changeTag(value) }
@@ -113,12 +117,12 @@ export default function AddExpenseForm() {
       </section>
 
       <section>
-        <label htmlFor="description-input">
+        <label htmlFor="Add-description-input">
           Descricao:
           <input
             type="text"
             value={ description }
-            id="description-input"
+            id="Add-description-input"
             data-testid="description-input"
             onChange={ ({ target: { value } }) => changeDescription(value) }
           />

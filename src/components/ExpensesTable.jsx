@@ -48,9 +48,9 @@ export default function ExpensesTable() {
             <td>
               Real
               {
+                // o teste quebra se colocar o nome dinamicamente
                 /* exchangeRates[currency].name.split('/')[1] */
               }
-
             </td>
             <td>
               <button

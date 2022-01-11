@@ -2,10 +2,12 @@ import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 
 function Header() {
-  const [currencieSelected, changeCurrency] = useState('BRL');
-  const email = useSelector((state) => state.user.email);
+  const userEmail = useSelector((state) => state.user.email);
   const walletExpenses = useSelector((state) => state.wallet.expenses);
-  const currencies = useSelector((state) => state.wallet.currencies);
+  const currenciesKeys = useSelector((state) => state.wallet.currencies);
+
+  const [currencieSelected, changeCurrency] = useState('BRL');
+
   const calculateTotal = (expenses) => {
     const total = expenses
       .reduce((acc, { value, exchangeRates, currency }) => (
@@ -13,13 +15,13 @@ function Header() {
       ), 0);
     return total.toFixed(2).toString();
   };
+
   return (
     <header>
-      <p data-testid="email-field">{email}</p>
+      <p data-testid="email-field">{`Email: ${userEmail}`}</p>
       <p data-testid="total-field">
-        {
-          calculateTotal(walletExpenses)
-        }
+        {`
+          Despesa Total: ${calculateTotal(walletExpenses)} `}
       </p>
       <select
         value={ currencieSelected }
@@ -27,7 +29,7 @@ function Header() {
         onChange={ ({ target: { value } }) => changeCurrency(value) }
       >
         <option value="BRL">BRL</option>
-        {currencies.map((currencie) => (
+        {currenciesKeys.map((currencie) => (
           <option key={ currencie } value={ currencie }>{currencie}</option>
         ))}
       </select>

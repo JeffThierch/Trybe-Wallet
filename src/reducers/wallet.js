@@ -22,19 +22,21 @@ const wallet = (state = INITIAL_STATE, action) => {
       ...state,
       expenses: state.expenses.map((expense) => {
         if (expense.id === action.payload.id) {
-          console.log(expense, action.payload);
           return action.payload;
         }
         return expense;
       }),
       isInEditMode: false,
+      expenseToEdit: {},
     };
+
   case ENTER_EDIT_MODE:
     return {
       ...state,
       isInEditMode: true,
       expenseToEdit: action.payload,
     };
+
   case ADD_CURRENCIES:
     return {
       ...state,
@@ -42,6 +44,7 @@ const wallet = (state = INITIAL_STATE, action) => {
       error: action.payload.error,
       currenciesData: { ...action.payload.currenciesData },
     };
+
   case ADD_EXPENSE:
     return {
       ...state,
@@ -52,6 +55,7 @@ const wallet = (state = INITIAL_STATE, action) => {
       ...state,
       expenses: state.expenses.filter(({ id }) => id !== action.payload),
     };
+
   default:
     return state;
   }
