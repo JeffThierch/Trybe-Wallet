@@ -18,16 +18,16 @@ export const addExpenseToWallet = (expense) => (
   }
 );
 
-export const addCurrencies = (currencies, error) => (
+export const addCurrencies = (currenciesKeys, currenciesData, error) => (
   {
     type: ADD_CURRENCIES,
-    payload: { currencies, error },
+    payload: { currenciesKeys, currenciesData, error },
   }
 );
 
 export function fetchCurrenciesToState() {
   return async (dispatch) => {
-    const { data, error } = await fetchCurrencies();
-    dispatch(addCurrencies(data, error));
+    const { keys, currenciesData, error } = await fetchCurrencies();
+    dispatch(addCurrencies(keys, currenciesData, error));
   };
 }

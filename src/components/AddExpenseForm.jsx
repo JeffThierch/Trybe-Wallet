@@ -12,21 +12,24 @@ export default function AddExpenseForm() {
   const dispatch = useDispatch();
   const walletExpenses = useSelector((state) => state.wallet.expenses);
   const fetchedCurrencies = useSelector((state) => state.wallet.currencies);
+  const currenciesData = useSelector((state) => state.wallet.currenciesData);
 
   useEffect(() => {
     dispatch(fetchCurrenciesToState());
   }, [dispatch]);
 
   const handleBtnClick = () => {
+    dispatch(fetchCurrenciesToState());
+
     dispatch(addExpenseToWallet(
       {
         id: walletExpenses.length,
-        valueExpense,
+        value: valueExpense.toString(),
         description,
         currency,
-        paymentMethod,
+        method: paymentMethod,
         tag,
-        exchangeRates: { ...fetchedCurrencies },
+        exchangeRates: { ...currenciesData },
       },
     ));
 
@@ -62,13 +65,13 @@ export default function AddExpenseForm() {
             onChange={ ({ target: { value } }) => changeCurrency(value) }
             value={ currency }
           >
-            {fetchedCurrencies.map(({ code }, index) => (
+            {fetchedCurrencies.map((key, index) => (
               <option
-                data-testid={ code }
+                data-testid={ key }
                 key={ index + 1 }
-                value={ code }
+                value={ key }
               >
-                {code}
+                {key}
               </option>
             ))}
           </select>
@@ -84,9 +87,9 @@ export default function AddExpenseForm() {
             value={ paymentMethod }
             onChange={ ({ target: { value } }) => changePaymentMethod(value) }
           >
-            <option value="cash">Dinheiro</option>
-            <option value="credit-card">Cartão de crédito</option>
-            <option value="debit-card">Cartão de débito</option>
+            <option value="Dinheiro">Dinheiro</option>
+            <option value="Cartão de crédito">Cartão de crédito</option>
+            <option value="Cartão de débito">Cartão de débito</option>
           </select>
         </label>
       </section>
@@ -100,11 +103,11 @@ export default function AddExpenseForm() {
             value={ tag }
             onChange={ ({ target: { value } }) => changeTag(value) }
           >
-            <option value="food">Alimentação</option>
-            <option value="leisure">Lazer</option>
-            <option value="job">Trabalho</option>
-            <option value="transport">Transporte</option>
-            <option value="health-care">Saúde</option>
+            <option value="Alimentação">Alimentação</option>
+            <option value="Lazer">Lazer</option>
+            <option value="Trabalho">Trabalho</option>
+            <option value="Transporte">Transporte</option>
+            <option value="Saúde">Saúde</option>
           </select>
         </label>
       </section>
