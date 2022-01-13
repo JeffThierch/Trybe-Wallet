@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 import { setUserEmail } from '../actions';
+import '../styles/Login.css';
 
 function Login() {
   const [isDisabled, toggleDisabled] = useState(true);
@@ -36,9 +37,9 @@ function Login() {
   }, [userEmail, userPasswordLength]);
 
   return (
-    <main>
-      <form>
-        <div>
+    <main className="main-container">
+      <form className="form-container">
+        <div className="Login-inputs-container">
           <input
             type="email"
             data-testid="email-input"
@@ -54,7 +55,7 @@ function Login() {
             onChange={ handlePasswordChange }
           />
         </div>
-        <div>
+        <div className="Login-submit-container">
           <button
             type="button"
             disabled={ isDisabled }

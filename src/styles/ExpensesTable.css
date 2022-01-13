@@ -1,0 +1,64 @@
+.Table-main-container {
+  border-collapse: collapse;
+  border-spacing: 0;
+  margin-top: 0.9rem;
+  width: 100vw;
+}
+
+
+.Table-thead-container {
+  background-color: rgb(43, 39, 39);
+  color: white;
+  font-size: 0.7em;
+  font-weight: 600;
+  margin: 0;
+
+}
+
+.Table-thead-container th {
+  padding: 0.5rem;
+}
+
+.Table-tbody-container {
+  font-size: 0.7em;
+  text-align: center;
+}
+
+.Table-tbody-container tr {
+  border-bottom: 1px solid rgba(65, 51, 51, 0.541);
+}
+
+.Table-tbody-container td {
+  padding: 0.5rem 0;
+}
+
+.edit-btn {
+  background-color: rgb(241, 179, 9);
+  border: 1px solid rgba(223, 218, 218, 0.863);
+  border-radius: 3px;
+  margin-right: 0.3rem;
+  transition: all 0.3s ease;
+  vertical-align: middle;
+}
+
+.edit-btn:hover {
+  cursor: pointer;
+  opacity: 0.8;
+}
+
+.delete-btn {
+  background-color: rgb(241, 9, 9);
+  border: 1px solid rgba(223, 218, 218, 0.863);
+  border-radius: 3px;
+  transition: all 0.3s ease;
+  vertical-align: middle;
+}
+
+.delete-btn:hover {
+  cursor: pointer;
+  opacity: 0.8;
+}
+
+.delete-btn svg {
+  color: rgba(255, 255, 255, 0.911);
+}

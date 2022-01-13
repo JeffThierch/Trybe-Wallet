@@ -1,8 +1,10 @@
 import React from 'react';
 import { FaTrashAlt, FaEdit } from 'react-icons/fa';
 import { useSelector, useDispatch } from 'react-redux';
+import getSymbolFromCurrency from 'currency-symbol-map';
 import { removeExpense, enterInEditMode } from '../actions';
 import { tablesHeads } from '../data';
+import '../styles/ExpensesTable.css';
 
 export default function ExpensesTable() {
   const walletExpenses = useSelector((state) => state.wallet.expenses);
@@ -24,26 +26,38 @@ export default function ExpensesTable() {
   };
 
   return (
-    <table>
-      <thead>
+    <table className="Table-main-container">
+      <thead className="Table-thead-container">
         <tr>
           {tablesHeads.map((head, index) => (
             <th key={ index }>{head}</th>
           ))}
         </tr>
       </thead>
-      <tbody>
+      <tbody className="Table-tbody-container">
         {walletExpenses.map((
           { id, value, description, currency, method, tag, exchangeRates },
         ) => (
-          <tr key={ id }>
+          <tr classNam="Table-expense-row" key={ id }>
             <td>{description}</td>
             <td>{tag}</td>
             <td>{method}</td>
-            <td>{value}</td>
-            <td>{exchangeRates[currency].name.split('/')[0]}</td>
-            <td>{parseFloat(exchangeRates[currency].ask).toFixed(2)}</td>
-            <td>{calculateCurrencyValue(value, currency, exchangeRates)}</td>
+            <td>{`${getSymbolFromCurrency(currency)}${value}` }</td>
+            <td>
+              {exchangeRates[currency].name.split('/')[0]}
+            </td>
+            <td>
+              {`
+            ${getSymbolFromCurrency('BRL')}
+            ${parseFloat(exchangeRates[currency].ask).toFixed(2)}
+            `}
+            </td>
+            <td>
+              {`
+            ${getSymbolFromCurrency('BRL')}
+            ${calculateCurrencyValue(value, currency, exchangeRates)}
+            `}
+            </td>
 
             <td>
               Real
@@ -57,6 +71,7 @@ export default function ExpensesTable() {
                 type="button"
                 data-testid="edit-btn"
                 onClick={ () => editExpense(id) }
+                className="edit-btn"
               >
                 <FaEdit />
               </button>
@@ -65,6 +80,8 @@ export default function ExpensesTable() {
                 type="button"
                 data-testid="delete-btn"
                 onClick={ () => deleteExpense(id) }
+                className="delete-btn"
+
               >
                 <FaTrashAlt />
               </button>

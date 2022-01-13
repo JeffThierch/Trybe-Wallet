@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
+import '../styles/Header.css';
+import getSymbolFromCurrency from 'currency-symbol-map';
 
 function Header() {
   const userEmail = useSelector((state) => state.user.email);
@@ -17,22 +19,32 @@ function Header() {
   };
 
   return (
-    <header>
-      <p data-testid="email-field">{`Email: ${userEmail}`}</p>
-      <p data-testid="total-field">
-        {`
-          Despesa Total:${calculateTotal(walletExpenses)} `}
-      </p>
-      <select
-        value={ currencieSelected }
-        data-testid="header-currency-field"
-        onChange={ ({ target: { value } }) => changeCurrency(value) }
-      >
-        <option value="BRL">BRL</option>
-        {currenciesKeys.map((currencie) => (
-          <option key={ currencie } value={ currencie }>{currencie}</option>
-        ))}
-      </select>
+    <header className="Header-main-container">
+      <p className="Header-email" data-testid="email-field">{`Email: ${userEmail}`}</p>
+      <section className="Header-total-container">
+        <p className="Header-total" data-testid="total-field">
+          {`
+          Despesa Total: ${
+    getSymbolFromCurrency(currencieSelected)}
+    ${calculateTotal(walletExpenses)} 
+    `}
+        </p>
+        <label htmlFor="Header-currency-selector">
+          Moeda:
+          <select
+            value={ currencieSelected }
+            id="Header-currency-selector"
+            data-testid="header-currency-field"
+            onChange={ ({ target: { value } }) => changeCurrency(value) }
+          >
+            <option value="BRL">BRL</option>
+            {currenciesKeys.map((currencie) => (
+              <option key={ currencie } value={ currencie }>{currencie}</option>
+            ))}
+          </select>
+        </label>
+
+      </section>
 
     </header>
   );

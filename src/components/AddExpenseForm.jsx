@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addExpenseToWallet, fetchCurrenciesToState } from '../actions';
 import { tags, methods } from '../data';
+import '../styles/AddExpensesForm.css';
 
 export default function AddExpenseForm() {
   const dispatch = useDispatch();
@@ -46,9 +47,9 @@ export default function AddExpenseForm() {
   };
 
   return (
-    <form>
+    <form className="AddExpenses-form-container">
 
-      <section>
+      <section className="Add-value-container">
         <label htmlFor="Add-value-input">
           Valor:
           <input
@@ -129,7 +130,13 @@ export default function AddExpenseForm() {
         </label>
       </section>
 
-      <button type="button" onClick={ handleBtnClick }>Adicionar despesa</button>
+      <button
+        className="Add-btn-expense"
+        type="button"
+        onClick={ handleBtnClick }
+      >
+        Adicionar despesa
+      </button>
     </form>
   );
 }

@@ -1,0 +1,39 @@
+.Header-main-container {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  width: 100vw;
+}
+
+.Header-email {
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin: 0 0.7rem;
+}
+
+.Header-total-container {
+  align-items: center;
+  display: flex;
+}
+
+.Header-total {
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.Header-total-container label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-left: 0.6rem;
+  margin-right: 0.7rem;
+}
+
+.Header-total-container select {
+  background-color: white;
+  border: 1px solid rgba(77, 62, 62, 0.37);
+  border-radius: 3px;
+  box-shadow: 1px 1px 4px rgb(19, 93, 231);
+  height: max-content;
+  margin-left: 0.4rem;
+  padding: 0.2rem;
+}
