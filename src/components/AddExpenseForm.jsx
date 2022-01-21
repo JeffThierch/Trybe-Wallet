@@ -28,12 +28,19 @@ export default function AddExpenseForm() {
     changeTag(tags[0]);
   };
 
+  const generateExpenseID = (expensesArray) => {
+    if (expensesArray.length !== 0) {
+      return (expensesArray[expensesArray.length - 1].id + 1);
+    }
+    return 0;
+  };
+
   const handleBtnClick = () => {
     dispatch(fetchCurrenciesToState());
 
     dispatch(addExpenseToWallet(
       {
-        id: walletExpenses.length,
+        id: generateExpenseID(walletExpenses),
         value: valueExpense,
         description,
         currency,
