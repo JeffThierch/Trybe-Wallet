@@ -1,6 +1,6 @@
 .main-container {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   height: 100vh;
   justify-content: center;
   width: 100vw;
@@ -28,8 +28,8 @@
 .Login-inputs-container input {
   background: rgba(255, 255, 255, 0.849);
   border: 1px solid rgba(58, 52, 52, 0.514);
-  border-radius: 3px;
-  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  padding: 0.4rem 1rem;
 }
 
 .Login-submit-container {
@@ -42,6 +42,7 @@
   border: none;
   border-radius: 3px;
   color: white;
+  margin-bottom: 1rem;
   padding: 0.5rem 1rem;
   transition: all 0.3s ease;
   width: 100%;
@@ -56,4 +57,21 @@
 .Login-submit-container button:disabled {
   cursor: not-allowed;
   opacity: 0.7;
+}
+
+.Login-Logo-container {
+  align-items: center;
+  display: flex;
+}
+
+.Login-Logo-container h1 {
+  color: rgb(26, 25, 25);
+  font-size: 2rem;
+  font-weight: 500;
+}
+
+.Login-Logo-container span {
+  color: rgb(79, 218, 15);
+  font-size: 2rem;
+  font-weight: 500;
 }

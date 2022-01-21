@@ -1,4 +1,4 @@
-.AddExpenses-form-container {
+.EditExpense-form-container {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
@@ -7,13 +7,13 @@
   width: 100vw;
 }
 
-.AddExpenses-form-container section {
+.EditExpense-form-container section {
   display: flex;
   justify-content: center;
   width: 100%;
 }
 
-.AddExpenses-form-container section label {
+.EditExpense-form-container section label {
   align-items: center;
   display: flex;
   flex-direction: column;
@@ -22,7 +22,7 @@
   width: 50%;
 }
 
-.AddExpenses-form-container section input {
+.EditExpense-form-container section input {
   background-color: white;
   border: 1px solid rgba(61, 52, 52, 0.699);
   border-radius: 5px;
@@ -31,7 +31,7 @@
   width: 90%;
 }
 
-.AddExpenses-form-container section select {
+.EditExpense-form-container section select {
   background-color: white;
   border: 1px solid rgba(61, 52, 52, 0.699);
   border-radius: 5px;
@@ -41,12 +41,12 @@
 
 }
 
-.AddExpenses-form-container section select:hover {
+.EditExpense-form-container section select:hover {
   cursor: pointer;
 }
 
-.Add-btn-expense {
-  background-color: rgb(44, 156, 230);
+.Edit-btn {
+  background-color: rgb(236, 47, 14);
   border: none;
   border-radius: 3px;
   color: white;
@@ -56,7 +56,7 @@
   width: 46%;
 }
 
-.Add-btn-expense:hover {
+.Edit-btn:hover {
   cursor: pointer;
   opacity: 0.9;
 }

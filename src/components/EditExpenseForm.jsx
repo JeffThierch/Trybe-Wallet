@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { tags, methods } from '../data';
 import { finishEditionOfExpense } from '../actions';
+import '../styles/EditExpenseForm.css';
 
 export default function EditExpenseForm() {
   const expenseToEdit = useSelector((state) => state.wallet.expenseToEdit);
@@ -26,7 +27,7 @@ export default function EditExpenseForm() {
   };
 
   return (
-    <form>
+    <form className="EditExpense-form-container">
       <section>
         <label htmlFor="Edit-value-input">
           Valor:
@@ -107,7 +108,13 @@ export default function EditExpenseForm() {
         </label>
       </section>
 
-      <button type="button" onClick={ handleBtnClick }>Editar despesa</button>
+      <button
+        className="Edit-btn"
+        type="button"
+        onClick={ handleBtnClick }
+      >
+        Editar despesa
+      </button>
     </form>
   );
 }

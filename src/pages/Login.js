@@ -39,7 +39,13 @@ function Login() {
   return (
     <main className="main-container">
       <form className="form-container">
-        <div className="Login-inputs-container">
+        <section className="Login-Logo-container">
+          <h1>
+            Trybe
+          </h1>
+          <span>Wallet</span>
+        </section>
+        <section className="Login-inputs-container">
           <input
             type="email"
             data-testid="email-input"
@@ -54,8 +60,8 @@ function Login() {
             autoComplete="true"
             onChange={ handlePasswordChange }
           />
-        </div>
-        <div className="Login-submit-container">
+        </section>
+        <section className="Login-submit-container">
           <button
             type="button"
             disabled={ isDisabled }
@@ -63,7 +69,7 @@ function Login() {
           >
             Entrar
           </button>
-        </div>
+        </section>
       </form>
     </main>);
 }

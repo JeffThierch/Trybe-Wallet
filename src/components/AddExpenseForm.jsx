@@ -51,7 +51,7 @@ export default function AddExpenseForm() {
 
       <section className="Add-value-container">
         <label htmlFor="Add-value-input">
-          Valor:
+          Valor
           <input
             type="number"
             id="Add-value-input"
@@ -64,7 +64,7 @@ export default function AddExpenseForm() {
 
       <section>
         <label htmlFor="Add-currency-input">
-          Moeda:
+          Moeda
           <select
             id="Add-currency-input"
             data-testid="currency-input"
@@ -86,7 +86,7 @@ export default function AddExpenseForm() {
 
       <section>
         <label htmlFor="Add-method-input">
-          Metodo de Pagamento:
+          Metodo de Pagamento
           <select
             id="Add-method-input"
             data-testid="method-input"
@@ -103,7 +103,7 @@ export default function AddExpenseForm() {
 
       <section>
         <label htmlFor="Add-tag-input">
-          Tag:
+          Tag
           <select
             id="Add-tag-input"
             data-testid="tag-input"
@@ -119,7 +119,7 @@ export default function AddExpenseForm() {
 
       <section>
         <label htmlFor="Add-description-input">
-          Descricao:
+          Descricao
           <input
             type="text"
             value={ description }

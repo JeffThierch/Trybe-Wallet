@@ -8,12 +8,61 @@ import '../styles/ExpensesTable.css';
 
 export default function ExpensesTable() {
   const walletExpenses = useSelector((state) => state.wallet.expenses);
+  const { currencieUsed } = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
   const calculateCurrencyValue = (value, currency, exchangeRates) => {
-    const convertedCurrencyValue = parseFloat(exchangeRates[currency].ask);
+    if (currencieUsed !== 'BRL') {
+      const convertedCurrencyValueInBRL = Number(exchangeRates[currency].ask);
+      const baseCurrencieValueInBRL = Number(exchangeRates[currencieUsed].ask);
+
+      const convertionValue = (convertedCurrencyValueInBRL / baseCurrencieValueInBRL);
+
+      if (convertionValue !== 0) {
+        const totalAmount = (convertionValue * value);
+        return totalAmount.toFixed(2);
+      }
+
+      const totalAmount = (1 * value);
+      return totalAmount.toFixed(2);
+    }
+
+    const convertedCurrencyValue = Number(exchangeRates[currency].ask);
     const totalAmount = (convertedCurrencyValue * value);
     return totalAmount.toFixed(2);
+  };
+
+  const returnUtilizedExchange = (currency, exchangeRates) => {
+    if (currencieUsed !== 'BRL') {
+      if (currencieUsed !== 'BTC') {
+        const convertedCurrencyValueInBRL = Number(exchangeRates[currency].ask);
+        const baseCurrencieValueInBRL = Number(exchangeRates[currencieUsed].ask);
+
+        const convertionValue = (convertedCurrencyValueInBRL / baseCurrencieValueInBRL);
+
+        return convertionValue.toFixed(2);
+      }
+      const convertedCurrencyValueInBRL = Number(exchangeRates[currency].ask);
+      const baseCurrencieValueInBRL = Number(exchangeRates[currencieUsed].ask
+        .replace('.', ''));
+
+      const convertionValue = (convertedCurrencyValueInBRL / baseCurrencieValueInBRL);
+
+      return convertionValue.toFixed(5);
+    }
+    return Number(exchangeRates[currency].ask).toFixed(2);
+  };
+
+  const returnCurrencyName = (currency, exchangeRates) => {
+    if (currency !== 'BRL') {
+      return exchangeRates[currency].name.split('/')[0];
+    }
+    return 'Real';
+  };
+
+  const getCurrencySymbol = (currency) => {
+    const simbol = getSymbolFromCurrency(currency);
+    return simbol === undefined ? '$' : simbol;
   };
 
   const deleteExpense = (expenseID) => {
@@ -42,26 +91,29 @@ export default function ExpensesTable() {
             <td>{description}</td>
             <td>{tag}</td>
             <td>{method}</td>
-            <td>{`${getSymbolFromCurrency(currency)}${value}` }</td>
             <td>
-              {exchangeRates[currency].name.split('/')[0]}
+              {`${getCurrencySymbol(currency)}${parseFloat(value)
+                .toFixed(2)}` }
+            </td>
+            <td>
+              {returnCurrencyName(currency, exchangeRates)}
             </td>
             <td>
               {`
-            ${getSymbolFromCurrency('BRL')}
-            ${parseFloat(exchangeRates[currency].ask).toFixed(2)}
+            ${getCurrencySymbol(currencieUsed)}
+            ${returnUtilizedExchange(currency, exchangeRates)}
             `}
             </td>
             <td>
               {`
-            ${getSymbolFromCurrency('BRL')}
+            ${getCurrencySymbol(currencieUsed)}
             ${calculateCurrencyValue(value, currency, exchangeRates)}
             `}
             </td>
 
             <td>
-              Real
               {
+                returnCurrencyName(currencieUsed, exchangeRates)
                 // o teste quebra se colocar o nome dinamicamente
                 /* exchangeRates[currency].name.split('/')[1] */
               }

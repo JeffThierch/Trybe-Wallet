@@ -6,6 +6,14 @@ export const REMOVE_EXPENSE = 'REMOVE_EXPENSE';
 export const ADD_CURRENCIES = 'ADD_CURRENCIES';
 export const ENTER_EDIT_MODE = 'ENTER_EDIT_MODE';
 export const FINISH_EDITION = 'FINISH_EDITION';
+export const CHANGE_BASE_CURRENCIE = 'CHANGE_BASE_CURRENCIE';
+
+export const setBaseCurrencie = (currencie) => (
+  {
+    type: CHANGE_BASE_CURRENCIE,
+    payload: currencie,
+  }
+);
 
 export const setUserEmail = (email) => (
   {
